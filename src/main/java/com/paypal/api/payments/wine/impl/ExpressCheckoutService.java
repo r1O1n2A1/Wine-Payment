@@ -73,9 +73,9 @@ public class ExpressCheckoutService implements IExpressCheckout {
 	@Override
 	public Payment retrievePaymentObject(String paymentID) throws PayPalRESTException {
 		APIContext apiContext = new APIContext(clientID, clientSecret, MODE);
-		payment = Payment.get(apiContext,paymentID);
+		payment = Payment.get(apiContext, paymentID);
 		logger.info("Payment retrieved ID = " + payment.getId()
-		+ ", status = " + payment.getState());
+			+ ", status = " + payment.getState());
 		return payment;
 	}
 

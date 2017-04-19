@@ -18,6 +18,7 @@ public class TestExpressCheckout {
 	private Map<String,String> detailsPayment = null;
 	private Payment nominalPayment = null;
 	private Payment expectedPayment = null;
+	private static String IDPAYMENT = "PAY-6F871714YK1376919LD3XMVA";
 	
 	public TestExpressCheckout() {
 		detailsPayment = new HashMap<>();
@@ -38,5 +39,9 @@ public class TestExpressCheckout {
 		Payment returnPayment = checkout.expressCheckoutService(detailsPayment);
 		Assert.assertNotNull(returnPayment);
 		Assert.assertEquals(returnPayment.getIntent(), expectedPayment.getIntent());
+	}
+	@Test
+	public void testGetNominal() throws PayPalRESTException {
+		Payment returnPayment = checkout.retrievePaymentObject(IDPAYMENT);
 	}
 }
