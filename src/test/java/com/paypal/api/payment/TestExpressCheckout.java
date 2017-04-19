@@ -36,12 +36,12 @@ public class TestExpressCheckout {
 	}
 	@Test
 	public void testNominal() throws PayPalRESTException {
-		Payment returnPayment = checkout.expressCheckoutService(detailsPayment);
+		String returnPayment = checkout.expressCheckoutService(detailsPayment);
 		Assert.assertNotNull(returnPayment);
-		Assert.assertEquals(returnPayment.getIntent(), expectedPayment.getIntent());
 	}
 	@Test
 	public void testGetNominal() throws PayPalRESTException {
-		Payment returnPayment = checkout.retrievePaymentObject(IDPAYMENT);
+		boolean returnPayment = checkout.retrievePaymentObject(IDPAYMENT);
+		Assert.assertTrue(returnPayment);
 	}
 }

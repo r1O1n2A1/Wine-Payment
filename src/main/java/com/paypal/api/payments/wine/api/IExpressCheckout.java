@@ -19,10 +19,10 @@ import com.paypal.base.rest.PayPalRESTException;
 public interface IExpressCheckout {
 	@WebMethod(operationName = "checkoutPaypal")
 	@WebResult(name = "checkoutDone")
-	Payment expressCheckoutService(@WebParam(name="detailsPayment")
+	String expressCheckoutService(@WebParam(name="detailsPayment")
 		Map<String,String> detailsPayment)  throws PayPalRESTException;
 	@WebMethod(operationName = "retrievePayment")
 	@WebResult(name = "paymentDone")
-	Payment retrievePaymentObject(@WebParam(name = "paymentID")
+	boolean retrievePaymentObject(@WebParam(name = "paymentID")
 		String paymentID)  throws PayPalRESTException;
 }

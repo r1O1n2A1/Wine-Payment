@@ -31,6 +31,7 @@ import com.paypal.api.payments.Transaction;
 import com.paypal.api.payments.util.SampleConstants;
 import com.paypal.api.payments.util.url.UrlOperationSystemUtile;
 import com.paypal.api.payments.wine.api.IExpressCheckout;
+import com.paypal.base.Constants;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
 
@@ -44,7 +45,7 @@ public class ExpressCheckoutService implements IExpressCheckout {
 	protected static Map<String, String> mapPayment = new HashMap<>();
 	private Payment payment;
 	@Override
-	public Payment expressCheckoutService(Map<String,String> detailsPayment) 
+	public String expressCheckoutService(Map<String,String> detailsPayment) 
 			throws PayPalRESTException {
 		if (detailsPayment != null) {
 			payment = createPayment(detailsPayment);
@@ -67,16 +68,19 @@ public class ExpressCheckoutService implements IExpressCheckout {
 		if(payment.getId() == null) {
 			throw new PayPalRESTException("payment has not been correctly created");
 		}
-		return payment;
+		return payment.getId();
 	}
 
 	@Override
-	public Payment retrievePaymentObject(String paymentID) throws PayPalRESTException {
+	public boolean retrievePaymentObject(String paymentID) throws PayPalRESTException {
 		APIContext apiContext = new APIContext(clientID, clientSecret, MODE);
 		payment = Payment.get(apiContext, paymentID);
 		logger.info("Payment retrieved ID = " + payment.getId()
 			+ ", status = " + payment.getState());
-		return payment;
+		if (!payment.getId().equalsIgnoreCase("")) {
+			return true;
+		}
+		return false;
 	}
 
 
