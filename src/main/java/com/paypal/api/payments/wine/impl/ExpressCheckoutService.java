@@ -44,6 +44,7 @@ public class ExpressCheckoutService implements IExpressCheckout {
 	private static final String REDIRECT_PAYPAL = "redirectPaypal";
 	protected static Map<String, String> mapPayment = new HashMap<>();
 	private Payment payment;
+	
 	@Override
 	public String expressCheckoutService(Map<String,String> detailsPayment) 
 			throws PayPalRESTException {
@@ -131,13 +132,15 @@ public class ExpressCheckoutService implements IExpressCheckout {
 		List<Item> items = new ArrayList<>();
 		if (detailsPayment.size() >= 1) {
 			for (int i = 1 ; i < detailsPayment.size()-1; i++) {
-				String itemIncoming = detailsPayment.get(String.valueOf(i));
-				String[] attributsItem = parserIncomingOrder(itemIncoming);
-				Item item = new Item();
-				item.setName(attributsItem[0]).setQuantity(attributsItem[2])
-				.setCurrency("EUR").setPrice(attributsItem[1]);
-				items.add(item);
-				itemList.setItems(items);
+				if (detailsPayment.get(String.valueOf(i)) != null) {
+					String itemIncoming = detailsPayment.get(String.valueOf(i));
+					String[] attributsItem = parserIncomingOrder(itemIncoming);
+					Item item = new Item();
+					item.setName(attributsItem[0]).setQuantity(attributsItem[2])
+					.setCurrency("EUR").setPrice(attributsItem[1]);
+					items.add(item);
+					itemList.setItems(items);
+				}
 			}
 		} else {
 			throw new PayPalRESTException("no items have been provided for checkout...");
