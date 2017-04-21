@@ -21,7 +21,7 @@ public final class SampleConstants {
 	public static final String PORT = "port";
 	public static final String CONTEXT = "contextPath";
 	public static Map<String,String> props;
-	public static final String URL_WINE_APP = "http://localhost:8081/Wine-Web/pages/checkout4confirmation.jsf?faces-redirect=true";
+	public static final String URL_WINE_APP = "http://192.168.102.70:8081/Wine-Web/pages/checkout4confirmation.jsf?faces-redirect=true";
 	public static final String WINDOWS = "win";
 	public static final String MAC = "mac";
 	public static final String LINUX = "nix";
